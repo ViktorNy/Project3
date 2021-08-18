@@ -10,3 +10,14 @@ Content-Type: application/json
     "color": "Röd",
     "price" : 2000
 }
+
+### 
+
+PUT http://localhost:3000/api/products/0
+Content-Type: application/json
+
+{
+    "name" : "Ny grej 2",
+    "color" : "Röd",
+    "price" : 1000
+}

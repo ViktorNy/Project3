@@ -1,6 +1,6 @@
 // Import modules
 const express = require('express');
-const {getProducts, getProduct, postProduct} = require('./products.controllers');
+const {getProducts, getProduct, postProduct, editProduct, deleteProduct} = require('./products.controllers');
 
 // Create router object
 const router = express.Router();
@@ -15,11 +15,11 @@ router.get('/api/products/:id', getProduct);
 // POST
 router.post('/api/products', postProduct);
 
-// // PUT 
-// router.put('/api/product/:id', putProduct);
+// PUT 
+router.put('/api/products/:id', editProduct);
 
-// // DELETE
-// router.delete('/api/product/:id', deleteProduct);
+// DELETE
+router.delete('/api/products/:id', deleteProduct);
 
 // Export router object
 module.exports = router;

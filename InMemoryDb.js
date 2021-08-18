@@ -17,6 +17,19 @@ function postProductToDb(product) {
     products.push(product);
 }
 
+function editProductInDb(index, product){
+    // Need to add null checks
+
+    products[index].color = product.color;
+    products[index].name = product.name;
+    products[index].price = product.price;
+
+    // return true if successful false if not
+    return true;
+}
+
 module.exports = {
-    products, postProductToDb
+    products, 
+    postProductToDb,
+    editProductInDb
 };

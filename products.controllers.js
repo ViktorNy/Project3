@@ -1,4 +1,4 @@
-const { products, postProductToDb } = require('./InMemoryDb');
+const { products, postProductToDb, editProductInDb } = require('./InMemoryDb');
 const { Response, Request, NextFunction } = require('express');
 // Express is needed to use req, res, and next
 
@@ -37,14 +37,48 @@ function getProduct(req, res, next) {
  * @param {NextFunction} next 
  */
 function postProduct(req, res) {
-    // Check Id and change it to productIdIndex
+    // Add product to database
     postProductToDb(req.body);
-
     res.status(202).json('Product added succesfully');
+}
+
+/**
+ * For editing existing product
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ */
+function editProduct(req, res) {
+    const { id } = req.params;
+
+    // Find index for product to edit
+    const index = products.findIndex((product) => product.id == id);
+
+    if (index < 0) {
+        res.status(404).json('Resource not found');
+    } else {
+        // edit product
+        const productEdited = editProductInDb(index, req.body);
+        if (productEdited) {
+            res.status(200).json('Resource changed successfully');
+        }
+    }
+}
+
+/**
+ * For deleting existing product
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ */
+function deleteProduct(req, res, next){
+    
 }
 
 module.exports = {
     getProducts,
     getProduct,
-    postProduct
+    postProduct,
+    editProduct,
+    deleteProduct
 }
