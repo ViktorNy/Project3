@@ -1,17 +1,7 @@
+const { products } = require('./InMemoryDb');
 const { Response, Request, NextFunction } = require('express');
-// Express is needed to use req, res, and next
 
-// InMemory DB
-const productIdIndex = 1; // Used for knowing where to set the id on post
-const products =
-    [
-        {
-            "id": 0,
-            "name": "towel",
-            "color": "red",
-            "price": 100
-        }
-    ]
+// Express is needed to use req, res, and next
 
 /**
  * Responds with all products from Db
@@ -32,7 +22,7 @@ function getProducts(req, res, next) {
 function getProduct(req, res, next) {
     const { id } = req.params;
 
-    const product = products.find((product) => product.id == id)
+    const product = db.find((product) => product.id == id)
 
     if (!product) {
         res.status(404).json('Product not found');
@@ -41,8 +31,18 @@ function getProduct(req, res, next) {
     }
 };
 
-function postProduct(req, res, next){
+/**
+ * For posting new product
+ * @param {Request} req 
+ * @param {Response} res 
+ * @param {NextFunction} next 
+ */
+function postProduct(req, res) {
     // Check Id and change it to productIdIndex
+    console.log(req.body);
+
+    // testing
+    res.status(200).json('Gick bra');
 
     // Increment productIdIndex
 }
@@ -50,4 +50,5 @@ function postProduct(req, res, next){
 module.exports = {
     getProducts,
     getProduct,
+    postProduct
 }

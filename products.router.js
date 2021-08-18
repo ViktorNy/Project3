@@ -1,6 +1,6 @@
 // Import modules
 const express = require('express');
-const {getProducts, getProduct} = require('./products.controllers');
+const {getProducts, getProduct, postProduct} = require('./products.controllers');
 
 // Create router object
 const router = express.Router();
@@ -12,8 +12,8 @@ router.get('/api/products', getProducts);
 // GET with Id
 router.get('/api/products/:id', getProduct);
 
-// // POST
-// router.post('/api/products', postProduct);
+// POST
+router.post('/api/products', postProduct);
 
 // // PUT 
 // router.put('/api/product/:id', putProduct);
