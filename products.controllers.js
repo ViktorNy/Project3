@@ -1,4 +1,4 @@
-const { products, postProductToDb, editProductInDb } = require('./InMemoryDb');
+const { products, postProductToDb, editProductInDb, deleteProductInDb } = require('./InMemoryDb');
 const { Response, Request, NextFunction } = require('express');
 // Express is needed to use req, res, and next
 
@@ -71,8 +71,14 @@ function editProduct(req, res) {
  * @param {Response} res 
  * @param {NextFunction} next 
  */
-function deleteProduct(req, res, next){
-    
+function deleteProduct(req, res, next) {
+    const { id } = req.params; 
+
+    const index = products.findIndex((product) => product.id == id);
+
+    deleteProductInDb(index);
+
+    res.status(200).json('Product deleted');
 }
 
 module.exports = {

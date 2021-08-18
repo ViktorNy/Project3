@@ -18,8 +18,6 @@ function postProductToDb(product) {
 }
 
 function editProductInDb(index, product){
-    // Need to add null checks
-
     products[index].color = product.color;
     products[index].name = product.name;
     products[index].price = product.price;
@@ -28,8 +26,15 @@ function editProductInDb(index, product){
     return true;
 }
 
+function deleteProductInDb(index) {
+    if (products[index]) {
+        products.splice(index, 1);
+    }
+}
+
 module.exports = {
     products, 
     postProductToDb,
-    editProductInDb
+    editProductInDb,
+    deleteProductInDb
 };
