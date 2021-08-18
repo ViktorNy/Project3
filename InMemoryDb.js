@@ -1,5 +1,5 @@
 // InMemory DB
-const productIdIndex = 1; // Used for knowing where to set the id on post
+let productIdIndex = 1; // Used for knowing where to set the id on post
 const products =
     [
         {
@@ -11,6 +11,10 @@ const products =
     ]
 
 function postProductToDb(product) {
+    product.id = productIdIndex;
+    productIdIndex++;
+
+    products.push(product);
 }
 
 module.exports = {

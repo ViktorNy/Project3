@@ -1,6 +1,5 @@
-const { products } = require('./InMemoryDb');
+const { products, postProductToDb } = require('./InMemoryDb');
 const { Response, Request, NextFunction } = require('express');
-
 // Express is needed to use req, res, and next
 
 /**
@@ -22,7 +21,7 @@ function getProducts(req, res, next) {
 function getProduct(req, res, next) {
     const { id } = req.params;
 
-    const product = db.find((product) => product.id == id)
+    const product = products.find((product) => product.id == id)
 
     if (!product) {
         res.status(404).json('Product not found');
@@ -39,12 +38,9 @@ function getProduct(req, res, next) {
  */
 function postProduct(req, res) {
     // Check Id and change it to productIdIndex
-    console.log(req.body);
+    postProductToDb(req.body);
 
-    // testing
-    res.status(200).json('Gick bra');
-
-    // Increment productIdIndex
+    res.status(202).json('Product added succesfully');
 }
 
 module.exports = {
