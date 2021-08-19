@@ -37,7 +37,6 @@ function getProduct(req, res, next) {
  * @param {NextFunction} next 
  */
 function postProduct(req, res) {
-    // Add product to database
     postProductToDb(req.body);
     res.status(202).json('Product added succesfully');
 }

@@ -1,9 +1,10 @@
 // InMemory DB
-let productIdIndex = 1; // Used for knowing where to set the id on post
+const {v4: uuidv4} = require('uuid');
+
 const products =
     [
         {
-            "id": 0,
+            "id": '64111a08-0136-47b5-830d-bf9de2e02bfd',
             "name": "towel",
             "color": "red",
             "price": 100
@@ -11,8 +12,7 @@ const products =
     ]
 
 function postProductToDb(product) {
-    product.id = productIdIndex;
-    productIdIndex++;
+    product.id = uuidv4();
 
     products.push(product);
 }
