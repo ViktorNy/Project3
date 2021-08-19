@@ -13,10 +13,10 @@ const products =
 
 function postProductToDb(product) {
     product.id = uuidv4();
-
     products.push(product);
 }
 
+// -- method needs fixing, return false if unsuccesful
 function editProductInDb(index, product){
     products[index].color = product.color;
     products[index].name = product.name;
@@ -29,6 +29,9 @@ function editProductInDb(index, product){
 function deleteProductInDb(index) {
     if (products[index]) {
         products.splice(index, 1);
+        return true;
+    } else {
+        return false;
     }
 }
 

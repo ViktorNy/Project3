@@ -20,7 +20,6 @@ function getProducts(req, res, next) {
  */
 function getProduct(req, res, next) {
     const { id } = req.params;
-
     const product = products.find((product) => product.id == id)
 
     if (!product) {
@@ -72,12 +71,14 @@ function editProduct(req, res) {
  */
 function deleteProduct(req, res, next) {
     const { id } = req.params; 
-
     const index = products.findIndex((product) => product.id == id);
+    const productDeleted = deleteProductInDb(index);
 
-    deleteProductInDb(index);
-
-    res.status(200).json('Product deleted');
+    if (productDeleted) {
+        res.status(200).json('Product deleted');
+    } else{
+        res.status(404).json('Product not found');
+    }
 }
 
 module.exports = {
