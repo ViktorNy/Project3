@@ -4,8 +4,8 @@ const { Response, Request, NextFunction } = require('express');
 
 /**
  * Responds with all products from Db
- * @param {Request} req 
  * @param {Response} res 
+ * @param {Request} req
  * @param {NextFunction} next 
  */
 function getProducts(req, res, next) {
@@ -48,18 +48,12 @@ function postProduct(req, res) {
  */
 function editProduct(req, res) {
     const { id } = req.params;
-
-    // Find index for product to edit
-    const index = products.findIndex((product) => product.id == id);
-
-    if (index < 0) {
-        res.status(404).json('Resource not found');
+    const productEdited = editProductInDb(id, req.body);
+    
+    if (productEdited) {
+        res.status(200).json('Resource changed successfully');
     } else {
-        // edit product
-        const productEdited = editProductInDb(index, req.body);
-        if (productEdited) {
-            res.status(200).json('Resource changed successfully');
-        }
+        res.status(404).json('Resource not found');
     }
 }
 
@@ -67,9 +61,8 @@ function editProduct(req, res) {
  * For deleting existing product
  * @param {Request} req 
  * @param {Response} res 
- * @param {NextFunction} next 
  */
-function deleteProduct(req, res, next) {
+function deleteProduct(req, res) {
     const { id } = req.params; 
     const index = products.findIndex((product) => product.id == id);
     const productDeleted = deleteProductInDb(index);

@@ -1,5 +1,5 @@
 // InMemory DB
-const {v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 const products =
     [
@@ -17,13 +17,17 @@ function postProductToDb(product) {
 }
 
 // -- method needs fixing, return false if unsuccesful
-function editProductInDb(index, product){
-    products[index].color = product.color;
-    products[index].name = product.name;
-    products[index].price = product.price;
+function editProductInDb(id, product) {
+    const index = products.findIndex((product) => product.id == id);
 
-    // return true if successful false if not
-    return true;
+    if (index > -1) {
+        products[index].color = product.color;
+        products[index].name = product.name;
+        products[index].price = product.price;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function deleteProductInDb(index) {
@@ -36,7 +40,7 @@ function deleteProductInDb(index) {
 }
 
 module.exports = {
-    products, 
+    products,
     postProductToDb,
     editProductInDb,
     deleteProductInDb
