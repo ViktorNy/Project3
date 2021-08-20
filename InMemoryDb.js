@@ -1,25 +1,37 @@
 // InMemory DB
 const { v4: uuidv4 } = require('uuid');
+const fs = require('fs');
 
-const products =
-    [
-        {
-            "id": '64111a08-0136-47b5-830d-bf9de2e02bfd',
-            "name": "towel",
-            "color": "red",
-            "price": 100
+function getProductsFromFile() {
+    let products;
+    
+    fs.readFile('products.json', 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
         }
-    ]
+        // parse JSON object
+        products = JSON.parse(data.toString());
+        
+        console.log(products);
+        return products;
+    });
+}
 
 function postProductToDb(product) {
     product.id = uuidv4();
-    products.push(product);
+    const data = JSON.stringify(product);
+    
+    fs.writeFile('products.json', data, (err) => {
+        if (err) {
+            throw err;
+        }
+        console.log('JSON data is saved');
+    });
 }
 
-// -- method needs fixing, return false if unsuccesful
 function editProductInDb(id, product) {
     const index = products.findIndex((product) => product.id == id);
-
+    
     if (index > -1) {
         products[index].color = product.color;
         products[index].name = product.name;
@@ -40,8 +52,19 @@ function deleteProductInDb(index) {
 }
 
 module.exports = {
-    products,
+    getProductsFromFile,
     postProductToDb,
     editProductInDb,
     deleteProductInDb
 };
+
+
+// const products =
+//     [
+//         {
+//             "id": '64111a08-0136-47b5-830d-bf9de2e02bfd',
+//             "name": "towel",
+//             "color": "red",
+//             "price": 100
+//         }
+//     ]

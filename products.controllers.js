@@ -1,5 +1,6 @@
-const { products, postProductToDb, editProductInDb, deleteProductInDb } = require('./InMemoryDb');
+const { postProductToDb, editProductInDb, deleteProductInDb, getProductsFromFile } = require('./InMemoryDb');
 const { Response, Request, NextFunction } = require('express');
+const fs = require('fs');
 // Express is needed to use req, res, and next
 
 /**
@@ -8,8 +9,16 @@ const { Response, Request, NextFunction } = require('express');
  * @param {Request} req
  * @param {NextFunction} next 
  */
-function getProducts(req, res, next) {
-    res.json(products);
+async function getProducts(req, res, next) {    
+    fs.readFile('products.json', 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        // parse JSON object
+        const products = JSON.parse(data.toString());
+        console.log(products);
+        res.status(200).json(products);
+    });
 };
 
 /**
@@ -20,6 +29,17 @@ function getProducts(req, res, next) {
  */
 function getProduct(req, res, next) {
     const { id } = req.params;
+
+    const products = fs.readFileSync('products.json', 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+        // parse JSON object
+        const products = JSON.parse(data.toString());
+        console.log(products);
+        res.status(200).json(products);
+    });
+
     const product = products.find((product) => product.id == id)
 
     if (!product) {
