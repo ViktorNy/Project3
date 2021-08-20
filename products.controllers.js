@@ -1,5 +1,5 @@
 const { postProductToDb, editProductInDb, deleteProductInDb, getProductsFromFile } = require('./InMemoryDb');
-const { Response, Request, NextFunction } = require('express');
+const { Response, Request, NextFunction, json } = require('express');
 const fs = require('fs');
 // Express is needed to use req, res, and next
 
@@ -9,14 +9,13 @@ const fs = require('fs');
  * @param {Request} req
  * @param {NextFunction} next 
  */
-async function getProducts(req, res, next) {    
+async function getProducts(req, res, next) {
     fs.readFile('products.json', 'utf-8', (err, data) => {
         if (err) {
             throw err;
         }
         // parse JSON object
         const products = JSON.parse(data.toString());
-        console.log(products);
         res.status(200).json(products);
     });
 };
@@ -30,17 +29,17 @@ async function getProducts(req, res, next) {
 function getProduct(req, res, next) {
     const { id } = req.params;
 
+    // Read whole JSON into variable
     const products = fs.readFileSync('products.json', 'utf-8', (err, data) => {
         if (err) {
             throw err;
         }
-        // parse JSON object
-        const products = JSON.parse(data.toString());
-        console.log(products);
-        res.status(200).json(products);
     });
+    // Parse JSON-string into an array
+    const productArray = JSON.parse(products);
 
-    const product = products.find((product) => product.id == id)
+    // Find the product searched for
+    const product = productArray.find((product) => product.id == id)
 
     if (!product) {
         res.status(404).json('Product not found');
@@ -69,7 +68,7 @@ function postProduct(req, res) {
 function editProduct(req, res) {
     const { id } = req.params;
     const productEdited = editProductInDb(id, req.body);
-    
+
     if (productEdited) {
         res.status(200).json('Resource changed successfully');
     } else {
@@ -83,13 +82,13 @@ function editProduct(req, res) {
  * @param {Response} res 
  */
 function deleteProduct(req, res) {
-    const { id } = req.params; 
+    const { id } = req.params;
     const index = products.findIndex((product) => product.id == id);
     const productDeleted = deleteProductInDb(index);
 
     if (productDeleted) {
         res.status(200).json('Product deleted');
-    } else{
+    } else {
         res.status(404).json('Product not found');
     }
 }
