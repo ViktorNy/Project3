@@ -2,7 +2,7 @@ const { postProductToDb, editProductInDb, deleteProductInDb, getProductsFromFile
 const { Response, Request, NextFunction, json } = require('express');
 // Express is needed to use req, res, and next
 const fs = require('fs');
-const { v4: uuidv4} = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 
 /**
  * Responds with all products from Db
@@ -12,7 +12,7 @@ const { v4: uuidv4} = require('uuid');
  */
 async function getProducts(req, res, next) {
     let products = readFromJson();
-    let productString = JSON.parse(products.toString()); 
+    let productString = JSON.parse(products.toString());
     res.status(200).json(productString);
 };
 
@@ -24,13 +24,8 @@ async function getProducts(req, res, next) {
  */
 function getProduct(req, res, next) {
     const { id } = req.params;
+    const products = readFromJson();
 
-    // Read whole JSON into variable
-    const products = fs.readFileSync('products.json', 'utf-8', (err, data) => {
-        if (err) {
-            throw err;
-        }
-    });
     // Parse JSON-string into an array
     const productArray = JSON.parse(products);
 
@@ -53,23 +48,15 @@ function getProduct(req, res, next) {
 function postProduct(req, res) {
     let product = req.body;
     product.id = uuidv4();
-    
-    const products = fs.readFileSync('products.json', 'utf-8', (err, data) => {
-        if (err) {
-            throw err;
-        }
-    });
-    
+    const products = readFromJson();
+
     // Parse JSON-string into an array
     let productArray = JSON.parse(products);
     productArray.push(product);
     let addProductArray = JSON.stringify(productArray);
 
-    fs.writeFile('products.json', addProductArray, (err) => {
-        if (err) {
-            throw err;
-        }
-    });
+    writeToJson(addProductArray);
+
     res.status(202).json('Product added succesfully');
 }
 
@@ -81,12 +68,22 @@ function postProduct(req, res) {
  */
 function editProduct(req, res) {
     const { id } = req.params;
-    const productEdited = editProductInDb(id, req.body);
+    const products = readFromJson();
+    const productArray = JSON.parse(products);
+    const product = req.body;
 
-    if (productEdited) {
-        res.status(200).json('Resource changed successfully');
+    // Find index of product to be edited
+    const index = productArray.findIndex((product) => product.id == id);
+
+    if (index < 0) {
+        res.status(404).json('Product not found');
     } else {
-        res.status(404).json('Resource not found');
+        productArray[index].color = product.color;
+        productArray[index].name = product.name;
+        productArray[index].price = product.price;
+        const productArrayString = JSON.stringify(productArray);
+        writeToJson(productArrayString);
+        res.status(200).json('Product edited');
     }
 }
 
@@ -105,28 +102,32 @@ function deleteProduct(req, res) {
 
     // Delete product from array with correct id
     const index = productArray.findIndex((product) => product.id == id);
-    
+
     if (index < 0) {
         res.status(404).json('Product not found');
     } else {
         productArray.splice(index, 1);
         let deletedProductString = JSON.stringify(productArray);
-        fs.writeFile('products.json', deletedProductString, (err) => {
-            if (err) {
-                throw err;
-            }
-        });
+        writeToJson(deletedProductString);
         res.status(200).json('Product successfully deleted');
     }
 }
 
-function readFromJson (){
+function readFromJson() {
     const products = fs.readFileSync('products.json', 'utf-8', (err, data) => {
         if (err) {
             throw err;
         }
     });
     return products;
+}
+
+function writeToJson(products) {
+    fs.writeFileSync('products.json', products, (err) => {
+        if (err) {
+            throw err;
+        }
+    });
 }
 
 module.exports = {

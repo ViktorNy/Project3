@@ -2,7 +2,7 @@ GET http://localhost:3000/api/products/
 
 ### 
 
-GET http://localhost:3000/api/products/17f9b4d5-ed23-4a10-ba1a-e3a91250e918
+GET http://localhost:3000/api/products/bc1b4d96-53a1-4844-8d9f-5c25cc8353d7
 
 ###
 
@@ -17,15 +17,15 @@ Content-Type: application/json
 
 ### 
 
-PUT http://localhost:3000/api/products/64111a08-0136-47b5-830d-bf9de2e02bfd
+PUT http://localhost:3000/api/products/ba936213-56ee-426b-87af-c993f079ee5d
 Content-Type: application/json
 
 {
-    "name" : "Ny grej 2",
+    "name" : "Ny grej editerad igen",
     "color" : "Röd",
     "price" : 1000
 }
 
 ###
 
-DELETE http://localhost:3000/api/products/82e7c9ee-f510-4378-9264-24920b8b967d
+DELETE http://localhost:3000/api/products/bc1b4d96-53a1-4844-8d9f-5c25cc8353d7

@@ -57,14 +57,3 @@ module.exports = {
     editProductInDb,
     deleteProductInDb
 };
-
-
-// const products =
-//     [
-//         {
-//             "id": '64111a08-0136-47b5-830d-bf9de2e02bfd',
-//             "name": "towel",
-//             "color": "red",
-//             "price": 100
-//         }
-//     ]
