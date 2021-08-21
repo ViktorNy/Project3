@@ -1,14 +1,1 @@
-[
-    {
-        "name": "Ny grej",
-        "color": "Röd",
-        "price": 2000,
-        "id": "17f9b4d5-ed23-4a10-ba1a-e3a91250e918"
-    },
-    {
-        "name": "Ny grej",
-        "color": "Röd",
-        "price": 2000,
-        "id": "17f9b4d5-ed23-4a10-ba1a-e3a91250e919"
-    }
-]
+[{"name":"Ny grej","color":"Röd","price":2000,"id":"bc1b4d96-53a1-4844-8d9f-5c25cc8353d7"},{"name":"Ny grej","color":"Röd","price":2000,"id":"f89305a0-f9f3-48fc-a939-452554428502"}]

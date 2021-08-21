@@ -1,7 +1,8 @@
 const { postProductToDb, editProductInDb, deleteProductInDb, getProductsFromFile } = require('./InMemoryDb');
 const { Response, Request, NextFunction, json } = require('express');
-const fs = require('fs');
 // Express is needed to use req, res, and next
+const fs = require('fs');
+const { v4: uuidv4} = require('uuid');
 
 /**
  * Responds with all products from Db
@@ -10,14 +11,9 @@ const fs = require('fs');
  * @param {NextFunction} next 
  */
 async function getProducts(req, res, next) {
-    fs.readFile('products.json', 'utf-8', (err, data) => {
-        if (err) {
-            throw err;
-        }
-        // parse JSON object
-        const products = JSON.parse(data.toString());
-        res.status(200).json(products);
-    });
+    let products = readFromJson();
+    let productString = JSON.parse(products.toString()); 
+    res.status(200).json(productString);
 };
 
 /**
@@ -55,7 +51,25 @@ function getProduct(req, res, next) {
  * @param {NextFunction} next 
  */
 function postProduct(req, res) {
-    postProductToDb(req.body);
+    let product = req.body;
+    product.id = uuidv4();
+    
+    const products = fs.readFileSync('products.json', 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+    });
+    
+    // Parse JSON-string into an array
+    let productArray = JSON.parse(products);
+    productArray.push(product);
+    let addProductArray = JSON.stringify(productArray);
+
+    fs.writeFile('products.json', addProductArray, (err) => {
+        if (err) {
+            throw err;
+        }
+    });
     res.status(202).json('Product added succesfully');
 }
 
@@ -82,15 +96,37 @@ function editProduct(req, res) {
  * @param {Response} res 
  */
 function deleteProduct(req, res) {
+    // Fetch ID from params
     const { id } = req.params;
-    const index = products.findIndex((product) => product.id == id);
-    const productDeleted = deleteProductInDb(index);
+    const products = readFromJson();
 
-    if (productDeleted) {
-        res.status(200).json('Product deleted');
-    } else {
+    // Parse to array
+    const productArray = JSON.parse(products);
+
+    // Delete product from array with correct id
+    const index = productArray.findIndex((product) => product.id == id);
+    
+    if (index < 0) {
         res.status(404).json('Product not found');
+    } else {
+        productArray.splice(index, 1);
+        let deletedProductString = JSON.stringify(productArray);
+        fs.writeFile('products.json', deletedProductString, (err) => {
+            if (err) {
+                throw err;
+            }
+        });
+        res.status(200).json('Product successfully deleted');
     }
+}
+
+function readFromJson (){
+    const products = fs.readFileSync('products.json', 'utf-8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+    });
+    return products;
 }
 
 module.exports = {
