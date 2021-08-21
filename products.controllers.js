@@ -1,4 +1,3 @@
-const { postProductToDb, editProductInDb, deleteProductInDb, getProductsFromFile } = require('./InMemoryDb');
 const { Response, Request, NextFunction, json } = require('express');
 // Express is needed to use req, res, and next
 const fs = require('fs');
@@ -10,7 +9,7 @@ const { v4: uuidv4 } = require('uuid');
  * @param {Request} req
  * @param {NextFunction} next 
  */
-async function getProducts(req, res, next) {
+async function getAllProducts(req, res, next) {
     let products = readFromJson();
     let productString = JSON.parse(products.toString());
     res.status(200).json(productString);
@@ -26,10 +25,7 @@ function getProduct(req, res, next) {
     const { id } = req.params;
     const products = readFromJson();
 
-    // Parse JSON-string into an array
     const productArray = JSON.parse(products);
-
-    // Find the product searched for
     const product = productArray.find((product) => product.id == id)
 
     if (!product) {
@@ -45,12 +41,11 @@ function getProduct(req, res, next) {
  * @param {Response} res 
  * @param {NextFunction} next 
  */
-function postProduct(req, res) {
+function addProduct(req, res) {
     let product = req.body;
     product.id = uuidv4();
     const products = readFromJson();
 
-    // Parse JSON-string into an array
     let productArray = JSON.parse(products);
     productArray.push(product);
     let addProductArray = JSON.stringify(productArray);
@@ -71,8 +66,7 @@ function editProduct(req, res) {
     const products = readFromJson();
     const productArray = JSON.parse(products);
     const product = req.body;
-
-    // Find index of product to be edited
+    
     const index = productArray.findIndex((product) => product.id == id);
 
     if (index < 0) {
@@ -131,9 +125,9 @@ function writeToJson(products) {
 }
 
 module.exports = {
-    getProducts,
+    getAllProducts,
     getProduct,
-    postProduct,
+    addProduct,
     editProduct,
     deleteProduct
 }
