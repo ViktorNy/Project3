@@ -52,7 +52,7 @@ function addProduct(req, res) {
 
     writeToJson(addProductArray);
 
-    res.status(202).json('Product added succesfully');
+    res.status(201).json('Product added succesfully');
 }
 
 /**

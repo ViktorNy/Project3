@@ -1,14 +1,1 @@
-[
-    {
-        "name": "Ny grej editerad igen",
-        "color": "Röd",
-        "price": 1000,
-        "id": "ba936213-56ee-426b-87af-c993f079ee5d"
-    },
-    {
-        "name": "Ny grej",
-        "color": "Röd",
-        "price": 2000,
-        "id": "98b1eb86-e8fe-49f9-8456-60ca2ef3400f"
-    }
-]
+[{"name":"Ny grej editerad igen","color":"Röd","price":1000,"id":"ba936213-56ee-426b-87af-c993f079ee5d"},{"name":"Ny grej","color":"Röd","price":2000,"id":"98b1eb86-e8fe-49f9-8456-60ca2ef3400f"},{"name":"Jeans","color":"Röd","price":2000,"id":"ad2a49ad-fb05-48dc-8354-4a75961f1257"}]
