@@ -42,17 +42,22 @@ function getProduct(req, res, next) {
  * @param {NextFunction} next 
  */
 function addProduct(req, res) {
-    let product = req.body;
-    product.id = uuidv4();
-    const products = readFromJson();
 
-    let productArray = JSON.parse(products);
-    productArray.push(product);
-    let addProductArray = JSON.stringify(productArray);
+    if (Object.keys(req.body).length === 0) {
+        res.status(404).json('No product data provided');
+    } else {
+        let product = req.body;
+        product.id = uuidv4();
+        const products = readFromJson();
 
-    writeToJson(addProductArray);
+        let productArray = JSON.parse(products);
+        productArray.push(product);
+        let addProductArray = JSON.stringify(productArray);
 
-    res.status(201).json('Product added succesfully');
+        writeToJson(addProductArray);
+
+        res.status(201).json('Product added succesfully');
+    }
 }
 
 /**
@@ -66,7 +71,7 @@ function editProduct(req, res) {
     const products = readFromJson();
     const productArray = JSON.parse(products);
     const product = req.body;
-    
+
     const index = productArray.findIndex((product) => product.id == id);
 
     if (index < 0) {
@@ -95,12 +100,12 @@ function deleteProduct(req, res) {
     const productArray = JSON.parse(products);
 
     // Delete product from array with correct id
-    const index = productArray.findIndex((product) => product.id == id);
+    const indexToDeleteAt = productArray.findIndex((product) => product.id == id);
 
-    if (index < 0) {
+    if (indexToDeleteAt < 0) {
         res.status(404).json('Product not found');
     } else {
-        productArray.splice(index, 1);
+        productArray.splice(indexToDeleteAt, 1);
         let deletedProductString = JSON.stringify(productArray);
         writeToJson(deletedProductString);
         res.status(200).json('Product successfully deleted');
