@@ -2,7 +2,7 @@ GET http://localhost:3000/api/products/
 
 ### 
 
-GET http://localhost:3000/api/products/bc1b4d96-53a1-4844-8d9f-5c25cc8353d7
+GET http://localhost:3000/api/products/ba936213-56ee-426b-87af-c993f079ee5d
 
 ###
 
@@ -10,25 +10,25 @@ POST http://localhost:3000/api/products
 Content-Type: application/json
 
 {
-    "name" : "Bil jr",
-    "color": "Röd",
-    "price" : 2000
+    "name" : "Tv-apparat",
+    "color": "Svart",
+    "price" : 20020
 }
 
 ### 
 
-PUT http://localhost:3000/api/products/ad2a49ad-fb05-48dc-8354-4a75961f1257
+PUT http://localhost:3000/api/products/cbf094e0-227a-4236-a708-5822a5a0987d
 Content-Type: application/json
 
 {
-    "name" : "Ny sorts jeans!",
+    "name" : "Röd tv istället",
     "color" : "Röd",
     "price" : 1000
 }
 
 ###
 
-DELETE http://localhost:3000/api/products/bc1b4d96-53a1-4844-8d9f-5c25cc8353d7
+DELETE http://localhost:3000/api/products/cbf094e0-227a-4236-a708-5822a5a0987d
 
 ###
 

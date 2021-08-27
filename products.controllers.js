@@ -1,5 +1,4 @@
 const { Response, Request, NextFunction, json } = require('express');
-// Express is needed to use req, res, and next
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
@@ -36,7 +35,7 @@ function getProduct(req, res, next) {
 };
 
 /**
- * For posting new product
+ * For adding a new product
  * @param {Request} req 
  * @param {Response} res 
  * @param {NextFunction} next 
