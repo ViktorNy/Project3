@@ -33,3 +33,9 @@ DELETE http://localhost:3000/api/products/bc1b4d96-53a1-4844-8d9f-5c25cc8353d7
 ###
 
 POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+    "name" : "Ny sorts jeans!",
+    "price" : 1000
+}

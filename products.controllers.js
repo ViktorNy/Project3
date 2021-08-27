@@ -41,10 +41,9 @@ function getProduct(req, res, next) {
  * @param {Response} res 
  * @param {NextFunction} next 
  */
-function addProduct(req, res) {
-
-    if (Object.keys(req.body).length === 0) {
-        res.status(404).json('No product data provided');
+function addProduct(req, res) {    
+    if (!req.body.name || !req.body.color || !req.body.price) {
+        res.status(404).json('Incomplete product data provided');
     } else {
         let product = req.body;
         product.id = uuidv4();
