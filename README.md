@@ -24,8 +24,8 @@ för att läsa och skriva till json-filen.
 
 ## Hur projektet byggs och körs
 1. Klona ner/ladda ner projekt.
-2. Kör följande kommandon i konsolen (det är dessa dependencies som finns): 
-npm i nodemon
-npm i express
-npm i uuid
+2. Kör följande kommandon i konsolen (det är dessa dependencies som finns):  
+- npm i nodemon
+- npm i express
+- npm i uuid
 3. Kör följande kommando i konsolen för att starta programmet: npm start
