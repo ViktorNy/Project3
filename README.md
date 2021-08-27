@@ -4,8 +4,7 @@
 Projektet är ett simpelt REST-API där man genom olika endpoints kan hantera resursen produkter. 
 Servern (server.js) använder sig av en router (products.router.js) som sköter routingen av 
 inkommande requests. Beroende på vad för sorts request som görs kallas en funktion i products.controllers.js.
-Denna fil sköter i sin tur kontakten med databasen (en json-fil) genom att använda sig av file system-modulen
-för att läsa och skriva till json-filen.  
+Denna funktionerna i denna fil sköter i sin tur kontakten med databasen (en json-fil) genom att använda sig av file system-modulen för att läsa och skriva till json-filen.  
 
 ## Uppfyllda krav
 ### Godkänt
@@ -30,3 +29,4 @@ för att läsa och skriva till json-filen.
 - npm i express
 - npm i uuid
 3. Kör följande kommando i konsolen för att starta programmet: npm start
+4. För att testa programmet kan server.rest användas för att skicka requests

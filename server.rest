@@ -1,11 +1,12 @@
+// Get all products
 GET http://localhost:3000/api/products/
 
 ### 
-
+// Get a specific product with matching ID
 GET http://localhost:3000/api/products/ba936213-56ee-426b-87af-c993f079ee5d
 
 ###
-
+// Post a new product to the database
 POST http://localhost:3000/api/products
 Content-Type: application/json
 
@@ -16,7 +17,7 @@ Content-Type: application/json
 }
 
 ### 
-
+// Change an existing product with matching ID
 PUT http://localhost:3000/api/products/cbf094e0-227a-4236-a708-5822a5a0987d
 Content-Type: application/json
 
@@ -27,11 +28,11 @@ Content-Type: application/json
 }
 
 ###
-
+// Delete a product with matching ID
 DELETE http://localhost:3000/api/products/cbf094e0-227a-4236-a708-5822a5a0987d
 
 ###
-
+// Try posting a product with not all values
 POST http://localhost:3000/api/products
 Content-Type: application/json
 
