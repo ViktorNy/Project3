@@ -23,5 +23,9 @@ för att läsa och skriva till json-filen.
 - [x] Ytterligare en GET endpoint skall läggas till där det går att hämta ett specifikt objekt
 
 ## Hur projektet byggs och körs
-
-
+1. Klona ner/ladda ner projekt.
+2. Kör följande kommandon i konsolen (det är dessa dependencies som finns): 
+npm i nodemon
+npm i express
+npm i uuid
+3. Kör följande kommando i konsolen för att starta programmet: npm start
