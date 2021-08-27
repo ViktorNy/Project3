@@ -23,7 +23,7 @@ för att läsa och skriva till json-filen.
 - [x] Ytterligare en GET endpoint skall läggas till där det går att hämta ett specifikt objekt
 
 ## Hur projektet byggs och körs
-**OBS: Node.js och NPM krävs: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
+**OBS: Node.js och NPM krävs: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm **
 1. Klona ner/ladda ner projekt.
 2. Kör följande kommandon i konsolen (det är dessa dependencies som finns):  
 - npm i nodemon
