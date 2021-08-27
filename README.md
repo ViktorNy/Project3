@@ -20,8 +20,6 @@ för att läsa och skriva till json-filen.
 - [x] Alla punkter för godkänt är uppfyllda
 - [x] All data ska vara sparad i en JSON-fil istället för i serverfilen
 - [x] Datan i JSON-filen skall uppdateras då något läggs till, uppdateras eller tas bort.
-- [] Ett simpelt klient-gränssnitt skall finnas för att anropa API:ets olika endpoints, samt
-visa upp resultatet vid GET anrop
 - [x] Ytterligare en GET endpoint skall läggas till där det går att hämta ett specifikt objekt
 
 ## Hur projektet byggs och körs
