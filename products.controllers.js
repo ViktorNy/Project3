@@ -91,14 +91,11 @@ function editProduct(req, res) {
  * @param {Response} res 
  */
 function deleteProduct(req, res) {
-    // Fetch ID from params
     const { id } = req.params;
     const products = readFromJson();
 
-    // Parse to array
     const productArray = JSON.parse(products);
 
-    // Delete product from array with correct id
     const indexToDeleteAt = productArray.findIndex((product) => product.id == id);
 
     if (indexToDeleteAt < 0) {
