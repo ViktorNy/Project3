@@ -1,10 +1,9 @@
 # Product REST - API
 
 ## Projektbeskrivning
-Projektet är ett simpelt REST-API där man genom olika endpoints kan hantera resursen produkter. 
-Servern (server.js) använder sig av en router (products.router.js) som sköter routingen av 
+Projektet är ett simpelt REST-API byggt med express-modulen där man genom olika endpoints kan hantera resursen produkter. Servern (server.js) använder sig av en router (products.router.js) som sköter routingen av 
 inkommande requests. Beroende på vad för sorts request som görs kallas en funktion i products.controllers.js.
-Denna funktionerna i denna fil sköter i sin tur kontakten med databasen (en json-fil) genom att använda sig av file system-modulen för att läsa och skriva till json-filen.  
+Denna funktionerna i denna fil sköter i sin tur kontakten med databasen (en json-fil) genom att använda sig av file system-modulen för att läsa och skriva till json-filen. Funktioner för att läsa från och skriva till databasen har lyfts ut till egna funktioner, då dessa återanvänds ofta. Nya produkter adderade till databasen får ett automatiskt genererat id, för detta använder projektet sig av en UUID-modul. Se "Hur projektet byggs och körs" för instruktioner om installation.  
 
 ## Uppfyllda krav
 ### Godkänt

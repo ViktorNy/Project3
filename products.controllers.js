@@ -40,11 +40,12 @@ function getProduct(req, res, next) {
  * @param {Response} res 
  * @param {NextFunction} next 
  */
-function addProduct(req, res) {    
+function addProduct(req, res) {
     if (!req.body.name || !req.body.color || !req.body.price) {
         res.status(404).json('Incomplete product data provided');
     } else {
         let product = req.body;
+        
         product.id = uuidv4();
         const products = readFromJson();
 
