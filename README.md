@@ -5,6 +5,8 @@ Projektet är ett simpelt REST-API byggt med express-modulen där man genom olik
 inkommande requests. Beroende på vad för sorts request som görs kallas en funktion i products.controllers.js.
 Denna funktionerna i denna fil sköter i sin tur kontakten med databasen (en json-fil) genom att använda sig av file system-modulen för att läsa och skriva till json-filen. Funktioner för att läsa från och skriva till databasen har lyfts ut till egna funktioner, då dessa återanvänds ofta. Nya produkter adderade till databasen får ett automatiskt genererat id, för detta använder projektet sig av en UUID-modul. Se "Hur projektet byggs och körs" för instruktioner om installation.  
 
+Länk till git-repo: https://github.com/ViktorNy/Project3
+
 ## Uppfyllda krav
 ### Godkänt
 - [x] Projektet innehåller minst 4 st. endpoints (GET, POST, PUT & DELETE för en resurs)
