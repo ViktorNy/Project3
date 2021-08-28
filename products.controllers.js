@@ -42,7 +42,7 @@ function getProduct(req, res, next) {
  */
 function addProduct(req, res) {
     if (!req.body.name || !req.body.color || !req.body.price) {
-        res.status(404).json('Incomplete product data provided');
+        res.status(400).json('Incomplete product data provided');
     } else {
         let product = req.body;
         
